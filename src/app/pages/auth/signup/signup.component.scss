@@ -1,0 +1,127 @@
+.signup {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../../../assets/pics/night_lantern.PNG");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_wrapper {
+    min-width: 300px;
+    width: 50vw;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 50%;
+  }
+
+  &_redirects {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 200px;
+  }
+
+  &_field {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &_label {
+    width: 100px;
+    display: inline-block;
+    font-weight: 700;
+    text-shadow: 0 0 10px whitesmoke;
+  }
+
+  &_input {
+    min-width: 100px;
+    width: 60%;
+    height: 25px;
+    outline: none;
+    border: none;
+    font-weight: 700;
+    padding-left: 5px;
+    background-color: rgb(245, 245, 245, 50%);
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &_link {
+    width: 45%;
+    font-size: 2rem;
+    text-decoration: none;
+    font-weight: 700;
+
+    &.up {
+      color: purple;
+      background-image: none;
+      text-shadow: 0 0 10px yellow;
+    }
+
+    &.in {
+      color: coral;
+      background-image: none;
+      text-shadow: 0 0 10px purple;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &_icon {
+    width: 50%;
+    aspect-ratio: 1 / 1;
+
+    &.up {
+      background-image: url("../../../../assets/icons/cabin-christmas.svg");
+      background-repeat: no-repeat;
+      display: inline-block;
+      background-size: contain;
+    }
+
+    &.in {
+      background-image: url("../../../../assets/icons/cabin.svg");
+      background-repeat: no-repeat;
+      display: inline-block;
+      background-size: contain;
+    }
+  }
+
+  &_submit {
+    width: 180px;
+    height: 50px;
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: black;
+    align-self: flex-end;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      cursor: auto;
+    }
+  }
+
+  &_form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgb(245, 245, 245, 30%);
+    padding: 20px;
+    margin-bottom: 50px;
+  }
+}

@@ -1,0 +1,88 @@
+<div class="signin">
+  <div class="signin_wrapper">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit(form.value)"
+      class="signin_form"
+    >
+      <div class="signin_field">
+        <label for="email" class="signin_label">Email</label>
+        <input
+          class="signin_input"
+          type="text"
+          formControlName="email"
+          id="email"
+          required
+        />
+      </div>
+      <div *ngIf="email?.invalid && email?.touched" class="alert alert-danger">
+        <div class="login_error" *ngIf="email?.errors?.['required']">
+          The login email is required
+        </div>
+        <div class="login_error" *ngIf="form.get('email')?.errors?.['email']">
+          The login email is invalid
+        </div>
+      </div>
+      <div class="signin_field">
+        <label for="password" class="signin_label">Password</label>
+        <input
+          class="signin_input"
+          type="text"
+          formControlName="password"
+          id="password"
+          required
+        />
+      </div>
+      <div
+        *ngIf="password?.invalid && password?.touched"
+        class="alert alert-danger"
+      >
+        <div class="login_error" *ngIf="password?.errors?.['required']">
+          The password is required
+        </div>
+        Your password isn't strong enough
+        <div
+          class="login_error"
+          *ngIf="!form.get('password')?.value?.match('^(?=.*[A-Z])')"
+        >
+          > should contain at least one uppercase letter
+        </div>
+        <div
+          class="login_error"
+          *ngIf="!form.get('password')?.value?.match('(?=.*[a-z])')"
+        >
+          > should contain at least one lowercase letter
+        </div>
+        <div
+          class="login_error"
+          *ngIf="!form.get('password')?.value?.match('(.*[0-9].*)')"
+        >
+          > should contain at least one digit
+        </div>
+        <div
+          class="login_error"
+          *ngIf="!form.get('password')?.value?.match('(?=.*[!@#$%^&*])')"
+        >
+          > should contain at least one special character i.e. ! &#64; # & %
+        </div>
+        <div
+          class="login_error"
+          *ngIf="!form.get('password')?.value?.match('.{8,}')"
+        >
+          > should be at least eight characters long
+        </div>
+      </div>
+      <button class="signin_submit" type="submit" [disabled]="!form.valid">
+        Login
+      </button>
+    </form>
+    <div class="signin_redirects">
+      <a routerLink="/signup" class="signin_link up"
+        ><span class="signin_icon up"></span>Signup</a
+      >
+      <a routerLink="/signin" class="signin_link in"
+        ><span class="signin_icon in"></span>Signin</a
+      >
+    </div>
+  </div>
+</div>

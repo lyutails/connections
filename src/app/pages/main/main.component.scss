@@ -1,0 +1,140 @@
+.main {
+  width: 100%;
+  background-image: url("../../../assets/pics/frost-and-ice-on-a-screen1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  font-size: 1.2rem;
+
+  &_wrapper {
+    width: 90vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    font-weight: 700;
+  }
+
+  &_groups {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &_group {
+    background: linear-gradient(0.25turn, salmon, plum);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding-left: 10px;
+  }
+
+  &_group_item {
+    text-decoration: none;
+    color: black;
+    font-family: "Delius";
+
+    &.name {
+      cursor: pointer;
+    }
+  }
+
+  &_user {
+    background: linear-gradient(0.25turn, salmon, plum);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding-left: 10px;
+  }
+
+  &_user_item {
+    text-decoration: none;
+    color: black;
+    font-family: "Delius";
+
+    &.name {
+      cursor: pointer;
+    }
+  }
+
+  &_left_title {
+    color: white;
+    font-family: "Delius Unicase", cursive;
+  }
+
+  &_left {
+    width: 44vw;
+    height: 80vh;
+    background-color: rgb(245, 245, 245, 30%);
+    border-radius: 10px;
+    padding: 1vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  &_right {
+    width: 44vw;
+    height: 80vh;
+    background-color: rgb(245, 245, 245, 30%);
+    border-radius: 10px;
+    padding: 1vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  &_buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 30%;
+    height: 40px;
+    border: none;
+  }
+
+  &_profile {
+    width: 20vw;
+    max-width: 150px;
+    min-width: 100px;
+    height: 40px;
+    align-self: flex-end;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(0.25turn, salmon, plum);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.highlight {
+  display: inline;
+  font-weight: 700;
+  color: purple;
+}

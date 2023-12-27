@@ -1,0 +1,43 @@
+.profile {
+  width: 100%;
+  background-image: url("../../../assets/pics/winter-solstice.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  font-size: 1.2rem;
+
+  &_wrapper {
+    width: 90vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    font-weight: 700;
+  }
+
+  &_logout {
+    width: 20vw;
+    max-width: 150px;
+    min-width: 100px;
+    height: 40px;
+    align-self: flex-end;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(0.25turn, salmon, plum);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-weight: 700;
+  }
+}

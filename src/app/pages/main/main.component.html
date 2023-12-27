@@ -1,0 +1,44 @@
+<div class="main">
+  <div class="main_wrapper">
+    <a routerLink="/profile" class="main_profile">Profile</a>
+    <div class="main_groups">
+      <div class="main_left">
+        <div class="main_buttons">
+          <p class="main_left_title">groups list</p>
+          <button class="main_button update">Update</button>
+          <button class="main_button create">Create</button>
+        </div>
+        @for (group of groups; track group.id) {
+        <div class="main_group">
+          <div class="main_group_item">id: {{ group.id["S"] }}</div>
+          <a class="main_group_item name"
+            >name:
+            <p class="highlight">{{ group.name["S"] }}</p></a
+          >
+          <div class="main_group_item">
+            createdAt: {{ group.createdAt["S"] | date : "medium" }}
+          </div>
+          <div class="main_group_item">
+            createdBy: {{ group.createdBy["S"] }}
+          </div>
+        </div>
+        }
+      </div>
+      <div class="main_right">
+        <div class="main_buttons">
+          <p class="main_left_title">users list</p>
+          <button class="main_button update">Update</button>
+        </div>
+        @for (user of users; track user.uid) {
+        <div class="main_user">
+          <div class="main_user_item">id: {{ user.uid["S"] }}</div>
+          <a class="main_user_item name"
+            >name:
+            <p class="highlight">{{ user.name["S"] }}</p></a
+          >
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
