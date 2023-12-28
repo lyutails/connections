@@ -75,33 +75,10 @@ export class UserService {
   }
 
   getGroups() {
-    /* const data = JSON.parse(localStorage.getItem('data')!);
-    const token = data['token'];
-    console.log(token);
-    const uid = data['uid']; */
-    /* const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'rs-uid': uid,
-        'rs-email': email,
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    console.log(uid, token, email); */
-
     return this.http.get<GroupsMetadata>(groupsListUrl);
   }
 
   getUsers() {
-    /* const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'rs-uid': uid,
-        'rs-email': `daf@af.gaffsa`,
-        Authorization: `Bearer ${token}`,
-      }),
-    }; */
-
     return this.http.get<UsersMetadata>(usersListUrl);
   }
 

@@ -1,7 +1,6 @@
 <div class="main">
   <div class="main_wrapper">
     <a routerLink="/profile" class="main_profile">Profile</a>
-    <div class="spinner">Spinner here</div>
     @if (groups && users && users !== [] && groups !== []) {
     <div class="main_groups">
       <div class="main_left">
@@ -42,6 +41,8 @@
         }
       </div>
     </div>
+    } @else {
+    <div class="spinner">Spinner here</div>
     }
   </div>
 </div>
