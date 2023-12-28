@@ -41,7 +41,7 @@ export class UserService {
       email: email,
       password: password,
     };
-    return this.http.post<RegistrationForm>(userRegistrationUrl, user, config);
+    return this.http.post<RegistrationForm>(userRegistrationUrl, user);
     // return this.http.post<User>(userRegistrationUrl, user);
   }
 
@@ -75,14 +75,19 @@ export class UserService {
   }
 
   getGroups() {
+    /* const data = JSON.parse(localStorage.getItem('data')!);
+    const token = data['token'];
+    console.log(token);
+    const uid = data['uid']; */
     /* const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'rs-uid': uid,
-        'rs-email': `daf@af.gaf`,
-        // Authorization: `Bearer ${token}`,
+        'rs-email': email,
+        Authorization: `Bearer ${token}`,
       }),
-    }; */
+    };
+    console.log(uid, token, email); */
 
     return this.http.get<GroupsMetadata>(groupsListUrl);
   }

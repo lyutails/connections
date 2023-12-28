@@ -47,8 +47,8 @@ export class SigninComponent {
       localStorage.setItem('data', JSON.stringify(data));
       localStorage.setItem('email', JSON.stringify(this.form.value.email));
       console.log(data);
+      this.router.navigate(['/main']);
     });
     // this.store.dispatch(UserActions.postUserData({users: {'daf@af.gaf'}}));
-    this.router.navigate(['/main']);
   }
 }

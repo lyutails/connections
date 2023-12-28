@@ -29,7 +29,8 @@ export class MainComponent implements OnInit {
     const data = JSON.parse(localStorage.getItem('data')!);
     const token = data['token'];
     const uid = data['uid'];
-    console.log(uid, token);
+    const email = JSON.parse(localStorage.getItem('email')!);
+    console.log(uid, token, email);
     this.userService.getGroups().subscribe((data) => {
       console.log(data.Items);
       const groupItems = data.Items;
@@ -38,10 +39,10 @@ export class MainComponent implements OnInit {
   }
 
   getUsers() {
-    const data = JSON.parse(localStorage.getItem('data')!);
+    /* const data = JSON.parse(localStorage.getItem('data')!);
     const token = data['token'];
     const uid = data['uid'];
-    console.log(uid, token);
+    console.log(uid, token); */
     this.userService.getUsers().subscribe((data) => {
       console.log(data);
       const users = data.Items;
