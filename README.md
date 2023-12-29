@@ -1,4 +1,4 @@
-# Connections ![screenshot](./src/assets/icons/gingerbread.svg)
+# Connections ![screenshot](./src/assets/icons/gingerbread.svg =200x200)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
 
@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 https://connections-gjh5.vercel.app/signup
 
-![screenshot](http://url/to/img.png)
+![screenshot](./src/assets/pics/screenshot_signup_page.PNG)
 
 ## Development server
 
