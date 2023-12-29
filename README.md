@@ -1,4 +1,11 @@
-# Connections ![<img src="./src/assets/icons/gingerbread.svg" width="250"/>](./src/assets/icons/gingerbread.svg)
+# Connections ![intro image](./src/assets/icons/gingerbread.svg)
+
+<style type="text/css">
+     img[alt="intro image"] {
+    width: 50px;
+    height: 50px;
+    }
+</style>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
 
