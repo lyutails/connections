@@ -1,4 +1,4 @@
-# Connections ![screenshot](./src/assets/icons/gingerbread.svg =200x200)
+# Connections ![<img src="./src/assets/icons/gingerbread.svg" width="250"/>](./src/assets/icons/gingerbread.svg)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
 
