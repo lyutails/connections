@@ -82,16 +82,7 @@ export class UserService {
     return this.http.get<UsersMetadata>(usersListUrl);
   }
 
-  getGroupById(uid: string, token: string) {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'rs-uid': uid,
-        'rs-email': `daf@af.gaf`,
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-
-    return this.http.get<GroupIdResponse>(getGroupByIdUrl, options);
+  getGroupById() {
+    return this.http.get<GroupIdResponse>(getGroupByIdUrl);
   }
 }

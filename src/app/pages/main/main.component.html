@@ -1,7 +1,22 @@
+@if (this.ifGroups !== true) {
+<div class="spinner_wrapper">
+  <div class="spinner">
+    <div class="spinner__outer-ring"></div>
+    <div class="spinner__inner-ring"></div>
+    <div class="spinner__track-cover"></div>
+    <div class="spinner__ball">
+      <div class="spinner__ball-texture"></div>
+      <div class="spinner__ball-outer-shadow"></div>
+      <div class="spinner__ball-inner-shadow"></div>
+      <div class="spinner__ball-side-shadows"></div>
+    </div>
+  </div>
+</div>
+} @else {
 <div class="main">
   <div class="main_wrapper">
     <a routerLink="/profile" class="main_profile">Profile</a>
-    @if (groups && users && users !== [] && groups !== []) {
+
     <div class="main_groups">
       <div class="main_left">
         <div class="main_buttons">
@@ -41,8 +56,6 @@
         }
       </div>
     </div>
-    } @else {
-    <div class="spinner">Spinner here</div>
-    }
   </div>
 </div>
+}

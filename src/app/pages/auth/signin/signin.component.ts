@@ -37,16 +37,10 @@ export class SigninComponent {
   }
 
   onSubmit(form: LoginForm) {
-    /* const data = JSON.parse(localStorage.getItem('data')!);
-    const token = data['token'];
-    const uid = data['uid']; */
-    console.log(this.form.value);
     this.authService.register();
-    console.log(this.authService.isLoggedIn);
     this.userService.loginUser(this.form.value).subscribe((data) => {
       localStorage.setItem('data', JSON.stringify(data));
       localStorage.setItem('email', JSON.stringify(this.form.value.email));
-      console.log(data);
       this.router.navigate(['/main']);
     });
     // this.store.dispatch(UserActions.postUserData({users: {'daf@af.gaf'}}));

@@ -16,39 +16,39 @@ import { debounceTime, delay } from 'rxjs';
 export class MainComponent implements OnInit {
   groups: GroupsItems[] = [];
   users: UsersList[] = [];
+  ifGroups: boolean = false;
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.getGroups();
-    console.log(this.groups);
-    this.groups.map((group) => console.log(group));
     this.getUsers();
+    // this.getGroupMessages();
   }
 
   getGroups() {
-    this.userService.getGroups().pipe(delay(2000)).subscribe((data) => {
+    this.userService.getGroups().pipe(delay(1000)).subscribe((data) => {
       const groupItems = data.Items;
       groupItems.map((group) => this.groups.push(group));
+      this.ifGroups = true;
     });
   }
 
   getUsers() {
-    this.userService.getUsers().pipe(delay(2000)).subscribe((data) => {
+    this.userService.getUsers().pipe(delay(1000)).subscribe((data) => {
       const users = data.Items;
       users.map((user) => this.users.push(user));
     });
   }
 
-  /* getGroupMessages() {
+  getGroupMessages() {
     const data = JSON.parse(localStorage.getItem('data')!);
     const token = data['token'];
     const uid = data['uid'];
-    console.log(uid, token);
-    this.userService.getGroupById(uid, token).subscribe((data) => {
+    this.userService.getGroupById().subscribe((data) => {
       console.log(data);
       const users = data.Items;
-      users.map((user) => this.users.push(user));
+      // users.map((user) => this.users.push(user));
     });
-  } */
+  }
 }

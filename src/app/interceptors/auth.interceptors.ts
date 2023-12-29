@@ -1,5 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import {
+  getGroupByIdUrl,
   groupsListUrl,
   userLoginUrl,
   userRegistrationUrl,
@@ -22,7 +23,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.startsWith(groupsListUrl) || req.url.startsWith(usersListUrl)) {
     const data = JSON.parse(localStorage.getItem('data')!);
     const token = data['token'];
-    console.log(token);
     const uid = data['uid'];
     const email = JSON.parse(localStorage.getItem('email')!);
     const authGroupsUsers = req.clone({
@@ -34,6 +34,22 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       },
     });
     return next(authGroupsUsers);
+  }
+
+  if (req.url.startsWith(getGroupByIdUrl)) {
+    const data = JSON.parse(localStorage.getItem('data')!);
+    const token = data['token'];
+    const uid = data['uid'];
+    const email = JSON.parse(localStorage.getItem('email')!);
+    const groupsMessages = req.clone({
+      setHeaders: {
+        'Content-Type': 'application/json',
+        'rs-uid': uid,
+        'rs-email': email,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return next(groupsMessages);
   }
 
   return next(req);
