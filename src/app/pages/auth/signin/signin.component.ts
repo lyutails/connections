@@ -6,6 +6,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordRegExp } from '../../../constants/password_regexp';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
+import * as UserAction from '../../../store/user.action';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-signin',
@@ -25,7 +27,8 @@ export class SigninComponent {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private userService: UserService //private store: Store
+    private userService: UserService,
+    private store: Store
   ) {}
 
   get email() {
@@ -37,12 +40,17 @@ export class SigninComponent {
   }
 
   onSubmit(form: LoginForm) {
+    const email = localStorage.getItem('email')!;
+    const name = localStorage.getItem('name')!;
+    const createdAt = localStorage.getItem('createdAt')!;
+    const data = JSON.parse(localStorage.getItem('data')!);
+    const id = data['uid'];
     this.authService.register();
     this.userService.loginUser(this.form.value).subscribe((data) => {
       localStorage.setItem('data', JSON.stringify(data));
       localStorage.setItem('email', JSON.stringify(this.form.value.email));
       this.router.navigate(['/main']);
     });
-    // this.store.dispatch(UserActions.postUserData({users: {'daf@af.gaf'}}));
+    this.store.dispatch(UserAction.postUserData({users: {id, name, email, createdAt}}));
   }
 }

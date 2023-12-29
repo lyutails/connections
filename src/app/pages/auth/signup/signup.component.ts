@@ -55,12 +55,20 @@ export class SignupComponent {
   }
 
   onSubmit(form: RegistrationForm) {
+    localStorage.clear();
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${day}-${month}-${year}`;
+    localStorage.setItem('createdAt', currentDate);
+    localStorage.setItem('name', this.form.value?.name!);
     console.log(this.form.value);
     this.authService.register();
     console.log(this.authService.isLoggedIn);
     this.userService.addUser(this.form.value).subscribe((data) => {
       console.log(data);
-    });;
+    });
     this.router.navigate(['/signin']);
   }
 }

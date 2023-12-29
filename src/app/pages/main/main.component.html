@@ -1,4 +1,4 @@
-@if (this.ifGroups !== true) {
+@if (this.ifGroups !== true && this.ifUsers !== true) {
 <div class="spinner_wrapper">
   <div class="spinner">
     <div class="spinner__outer-ring"></div>
@@ -27,7 +27,7 @@
         @for (group of groups; track group.id) {
         <div class="main_group">
           <div class="main_group_item">id: {{ group.id["S"] }}</div>
-          <a class="main_group_item name"
+          <a routerLink="/group/{:groupID}" class="main_group_item name"
             >name:
             <p class="highlight">{{ group.name["S"] }}</p></a
           >

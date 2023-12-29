@@ -40,8 +40,8 @@ export const routes: Routes = [
   {
     path: 'group/{:groupID}',
     loadComponent: () =>
-      import('./pages/profile/profile.component').then(
-        (mod) => mod.ProfileComponent
+      import('./pages/group-messages/group-messages.component').then(
+        (mod) => mod.GroupMessagesComponent
       ),
     canActivate: [authGuard],
   },

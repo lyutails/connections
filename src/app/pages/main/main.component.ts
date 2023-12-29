@@ -17,6 +17,7 @@ export class MainComponent implements OnInit {
   groups: GroupsItems[] = [];
   users: UsersList[] = [];
   ifGroups: boolean = false;
+  ifUsers: boolean = false;
 
   constructor(private userService: UserService) {}
 
@@ -38,6 +39,7 @@ export class MainComponent implements OnInit {
     this.userService.getUsers().pipe(delay(1000)).subscribe((data) => {
       const users = data.Items;
       users.map((user) => this.users.push(user));
+      this.ifUsers = true;
     });
   }
 

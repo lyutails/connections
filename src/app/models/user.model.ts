@@ -91,7 +91,7 @@ type groupIdItems = {
 };
 
 export interface UserProfileData {
-  uid: string;
+  id: string;
   name: string;
   email: string;
   createdAt: string;
