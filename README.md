@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Deploy
 
-https://connections-gjh5.vercel.app/signup
+**https://connections-gjh5.vercel.app/signup**
 
 ![screenshot](./src/assets/pics/screenshot_signup_page.PNG)
 
