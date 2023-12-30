@@ -47,6 +47,9 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
   private ambientLight!: THREE.AmbientLight;
   private directionalLight!: THREE.DirectionalLight;
   private lightOne!: THREE.PointLight;
+  private lightTwo!: THREE.PointLight;
+  private lightThree!: THREE.PointLight;
+  private lightFour!: THREE.PointLight;
   private controls!: OrbitControls;
 
   private createScene() {
@@ -74,13 +77,22 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
     this.ambientLight = new THREE.AmbientLight(0xffffff);
     this.scene.add(this.ambientLight);
 
-    /* this.directionalLight = new THREE.DirectionalLight(0xa3e4ff, 0.4);
+    this.directionalLight = new THREE.DirectionalLight(0x4bd3ff, 0.6);
     this.directionalLight.position.set(0, 1, 0);
     this.directionalLight.castShadow = true;
     this.scene.add(this.directionalLight);
     this.lightOne = new THREE.PointLight(0xff2bf2, 80);
-    this.lightOne.position.set(0, 100, -100);
-    this.scene.add(this.lightOne); */
+    this.lightOne.position.set(0, 10, -10);
+    this.scene.add(this.lightOne);
+    this.lightTwo = new THREE.PointLight(0x4bffd3, 60);
+    this.lightTwo.position.set(10, -10, 0);
+    this.scene.add(this.lightTwo);
+    this.lightThree = new THREE.PointLight(0xb83cff, 60);
+    this.lightThree.position.set(1, 5, 1);
+    this.scene.add(this.lightThree);
+    this.lightFour = new THREE.PointLight(0x25cdf1, 60);
+    this.lightFour.position.set(3, -5, 2);
+    this.scene.add(this.lightFour);
   }
 
   private getAspectRatio() {
