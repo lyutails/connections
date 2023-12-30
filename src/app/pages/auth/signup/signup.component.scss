@@ -36,6 +36,7 @@
     display: inline-block;
     font-weight: 700;
     text-shadow: 0 0 10px whitesmoke;
+    font-size: 1.1rem;
   }
 
   &_input {
@@ -142,11 +143,11 @@
       height: 100%;
       background: rgb(245, 245, 245, 30%);
       transform: skewX(45deg) translateX(-300%);
-      transition: all 0.5s ease-in-out;
+      transition: all 0.6s ease-in-out;
     }
 
     &:hover::before {
-      transform: skewX(45deg) translateX(1400%);
+      transform: skewX(45deg) translateX(120vw);
     }
   }
 }

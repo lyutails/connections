@@ -6,6 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 **https://connections-gjh5.vercel.app/signup**
 
+## Screenshots
+
 ![screenshot](./src/assets/pics/screenshot_signup_page.PNG)
 
 ![screenshot](./src/assets/pics/screenshot_404_page.PNG)
