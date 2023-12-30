@@ -1,0 +1,135 @@
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import * as THREE from 'three';
+import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+
+@Component({
+  selector: 'app-snowflake',
+  standalone: true,
+  imports: [],
+  templateUrl: './snowflake.component.html',
+  styleUrl: './snowflake.component.scss',
+})
+export class SnowflakeComponent implements OnInit, AfterViewInit {
+  @ViewChild('canvas')
+  private canvasRef!: ElementRef;
+  private loaderGLTF = new GLTFLoader();
+
+  @Input() public rotationSpeedX: number = 0.02;
+  @Input() public rotationSpeedY: number = 0.02;
+  @Input() public size: number = 200;
+  @Input() public texture: string =
+    '../../../assets/pics/frost-and-ice-on-a-screen1.jpg';
+  @Input() public cameraZ: number = 400;
+  @Input() public fieldOfView: number = 1;
+  @Input('nearClipping') public nearClippingPlane: number = 1;
+  @Input('farClippinig') public farClippingPlane: number = 1000;
+
+  private camera!: THREE.PerspectiveCamera;
+  private get canvas(): HTMLCanvasElement {
+    return this.canvasRef.nativeElement;
+  }
+  // private loader = new THREE.TextureLoader();
+  // private geometry = new THREE.BoxGeometry(1, 1, 1);
+  // private material = new THREE.MeshBasicMaterial({ map: this.loader.load(this.texture) });
+  // private snowflake: THREE.Mesh = new THREE.Mesh(this.geometry, this.material);
+  private renderer!: THREE.WebGLRenderer;
+  private scene!: THREE.Scene;
+  private snowflake: any;
+  private ambientLight!: THREE.AmbientLight;
+  private directionalLight!: THREE.DirectionalLight;
+  private lightOne!: THREE.PointLight;
+  private controls!: OrbitControls;
+
+  private createScene() {
+    this.scene = new THREE.Scene();
+
+    this.loaderGLTF.load(
+      '../../../assets/3D/snowflake_01.glb',
+      (gltf: GLTF) => {
+        this.snowflake = gltf.scene.children[0];
+        console.log(this.snowflake);
+        this.scene.add(this.snowflake);
+        this.snowflake.scale.set(3.8, 3.8, 3.8);
+      }
+    );
+
+    let aspectRatio = this.getAspectRatio();
+    this.camera = new THREE.PerspectiveCamera(
+      this.fieldOfView,
+      aspectRatio,
+      this.nearClippingPlane,
+      this.farClippingPlane
+    );
+    this.camera.position.z = this.cameraZ;
+
+    this.ambientLight = new THREE.AmbientLight(0xffffff);
+    this.scene.add(this.ambientLight);
+
+    /* this.directionalLight = new THREE.DirectionalLight(0xa3e4ff, 0.4);
+    this.directionalLight.position.set(0, 1, 0);
+    this.directionalLight.castShadow = true;
+    this.scene.add(this.directionalLight);
+    this.lightOne = new THREE.PointLight(0xff2bf2, 80);
+    this.lightOne.position.set(0, 100, -100);
+    this.scene.add(this.lightOne); */
+  }
+
+  private getAspectRatio() {
+    return this.canvas.clientWidth / this.canvas.clientHeight;
+  }
+
+  private animSnowflake() {
+    if (this.snowflake) {
+      this.snowflake.rotation.x += this.rotationSpeedX;
+      this.snowflake.rotation.y += this.rotationSpeedY;
+    }
+  }
+
+  private startRenderingLoop() {
+    this.renderer = new THREE.WebGL1Renderer({
+      canvas: this.canvas,
+      alpha: true,
+    });
+    this.renderer.setClearColor(0x000000, 0);
+    this.scene.background = null;
+    this.renderer.setPixelRatio(devicePixelRatio);
+    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+
+    let component: SnowflakeComponent = this;
+    (function render() {
+      requestAnimationFrame(render);
+      component.animSnowflake();
+      component.renderer.render(component.scene, component.camera);
+    })();
+  }
+
+  private createControls = () => {
+    const renderer = new CSS2DRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.domElement.style.position = 'absolute';
+    renderer.domElement.style.top = '0px';
+    document.body.appendChild(renderer.domElement);
+    this.controls = new OrbitControls(this.camera, renderer.domElement);
+    this.controls.autoRotate = true;
+    this.controls.enableZoom = true;
+    this.controls.enablePan = true;
+    this.controls.update();
+  }
+
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.createScene();
+    this.startRenderingLoop();
+    this.createControls();
+  }
+}

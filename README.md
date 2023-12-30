@@ -1,4 +1,4 @@
-# Connections <img src="./src/assets/icons/gingerbread.svg"  width="50" height="50">
+# Connections <img src="./src/assets/icons/gingerbread.svg"  width="40" height="40">
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
 
