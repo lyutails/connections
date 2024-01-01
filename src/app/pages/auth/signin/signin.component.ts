@@ -1,5 +1,5 @@
 import { LoginForm } from './../../../models/user.model';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Component, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, RouterModule],
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
   //providers: [Store],

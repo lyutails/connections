@@ -25,6 +25,16 @@ export const routes: Routes = [
       import('./pages/auth/signin/signin.component').then(
         (mod) => mod.SigninComponent
       ),
+      children: [
+        {
+          path: '',
+          loadComponent: () =>
+            import('./threejs/snowflake/snowflake.component').then(
+              (mod) => mod.SnowflakeComponent
+            ),
+          outlet: 'snowflake',
+        },
+      ],
   },
   {
     path: '',
