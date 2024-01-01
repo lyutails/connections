@@ -59,7 +59,6 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
       '../../../assets/3D/snowflake_01.glb',
       (gltf: GLTF) => {
         this.snowflake = gltf.scene.children[0];
-        console.log(this.snowflake);
         this.scene.add(this.snowflake);
         this.snowflake.scale.set(3.8, 3.8, 3.8);
       }
