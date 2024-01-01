@@ -8,7 +8,7 @@ export const routes: Routes = [
       import('./pages/auth/signup/signup.component').then(
         (mod) => mod.SignupComponent
       ),
-    /* children: [
+    children: [
       {
         path: '',
         loadComponent: () =>
@@ -17,7 +17,7 @@ export const routes: Routes = [
           ),
         outlet: 'snowflake',
       },
-    ], */
+    ],
   },
   {
     path: 'signin',
@@ -35,7 +35,7 @@ export const routes: Routes = [
     path: 'main',
     loadComponent: () =>
       import('./pages/main/main.component').then((mod) => mod.MainComponent),
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'profile',
@@ -43,7 +43,7 @@ export const routes: Routes = [
       import('./pages/profile/profile.component').then(
         (mod) => mod.ProfileComponent
       ),
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'group/{:groupID}',
@@ -51,16 +51,16 @@ export const routes: Routes = [
       import('./pages/group-messages/group-messages.component').then(
         (mod) => mod.GroupMessagesComponent
       ),
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
- /*  {
+  {
     path: 'snowflake',
     loadComponent: () =>
       import('./threejs/snowflake/snowflake.component').then(
         (mod) => mod.SnowflakeComponent
       ),
-    // canActivate: [authGuard],
-  }, */
+    canActivate: [authGuard],
+  },
   {
     path: '**',
     loadComponent: () =>
