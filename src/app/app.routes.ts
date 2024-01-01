@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { SnowflakeComponent } from './threejs/snowflake/snowflake.component';
 
 export const routes: Routes = [
   {
@@ -8,6 +9,16 @@ export const routes: Routes = [
       import('./pages/auth/signup/signup.component').then(
         (mod) => mod.SignupComponent
       ),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./threejs/snowflake/snowflake.component').then(
+            (mod) => mod.SnowflakeComponent
+          ),
+        outlet: 'snowflake',
+      },
+    ],
   },
   {
     path: 'signin',
@@ -24,9 +35,7 @@ export const routes: Routes = [
   {
     path: 'main',
     loadComponent: () =>
-      import('./pages/main/main.component').then(
-        (mod) => mod.MainComponent
-      ),
+      import('./pages/main/main.component').then((mod) => mod.MainComponent),
     // canActivate: [authGuard],
   },
   {

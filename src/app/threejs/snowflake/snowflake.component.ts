@@ -126,7 +126,7 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
 
   private createControls = () => {
     const renderer = new CSS2DRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(this.canvas.width, this.canvas.height);
     renderer.domElement.style.position = 'absolute';
     renderer.domElement.style.top = '0px';
     document.body.appendChild(renderer.domElement);
