@@ -1,4 +1,4 @@
-import {
+/* import {
   AfterViewInit,
   Component,
   ElementRef,
@@ -145,3 +145,4 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
     this.createControls();
   }
 }
+ */
