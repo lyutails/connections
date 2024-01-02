@@ -55,8 +55,10 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
   private createScene() {
     this.scene = new THREE.Scene();
 
+    this.loaderGLTF.setPath('../../../assets/3D/');
+
     this.loaderGLTF.load(
-      '../../../assets/3D/snowflake_01.glb',
+      'snowflake_01.glb',
       (gltf: GLTF) => {
         this.snowflake = gltf.scene.children[0];
         this.scene.add(this.snowflake);
