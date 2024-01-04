@@ -84,7 +84,7 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
       newLoader.load(this.snowflakePath, (gltf: GLTF) => {
         this.snowflake = gltf.scene.children[0];
         this.scene.add(this.snowflake);
-        this.snowflake.scale.set(3.8, 3.8, 3.8);
+        this.snowflake.scale.set(3.5, 3.5, 3.5);
       });
 
       let aspectRatio = this.getAspectRatio();
