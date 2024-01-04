@@ -16,6 +16,7 @@ import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { isPlatformBrowser } from '@angular/common';
 // import snowflakeGLB from '/assets/glb/snowflake_01.glb';
+// import snowflakeGLB from '../../../assets/glb/snowflake_01.glb';
 
 @Component({
   selector: 'app-snowflake',
@@ -59,6 +60,7 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
   private controls!: OrbitControls;
 
   public isBrowser = false;
+  private snowflakePath = '../../../assets/glb/snowflake_01.glb';
 
   constructor(@Inject(PLATFORM_ID) private platformId: InjectionToken<Object>) {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -72,13 +74,14 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
 
       const newLoader = this.loaderGLTF.setDRACOLoader(new DRACOLoader());
 
-      const snowflakePath = '/assets/glb/snowflake_01.glb';
+      // const snowflakePath = '/assets/glb/snowflake_01.glb';
+      // const snowflakePath = '../../../assets/glb/snowflake_01.glb';
 
-      if (snowflakePath === null && snowflakePath === undefined) {
+      if (this.snowflakePath === null && this.snowflakePath === undefined) {
         throw new Error('no path to glb model found');
       }
 
-      newLoader.load(snowflakePath, (gltf: GLTF) => {
+      newLoader.load(this.snowflakePath, (gltf: GLTF) => {
         this.snowflake = gltf.scene.children[0];
         this.scene.add(this.snowflake);
         this.snowflake.scale.set(3.8, 3.8, 3.8);
