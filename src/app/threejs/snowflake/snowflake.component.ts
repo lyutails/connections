@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
@@ -61,9 +62,18 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
 
   public isBrowser = false;
   private snowflakePath = '../../../assets/glb/snowflake_01.glb';
+  private snowflakeFetchPath =
+    'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=sharing';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: InjectionToken<Object>) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: InjectionToken<Object>,
+    private http: HttpClient
+  ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
+  getModel() {
+    return this.http.get(this.snowflakeFetchPath, { responseType: 'blob' });
   }
 
   private createScene() {
@@ -76,12 +86,13 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
 
       // const snowflakePath = '/assets/glb/snowflake_01.glb';
       // const snowflakePath = '../../../assets/glb/snowflake_01.glb';
+      // const snowflakePath = 'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link';
 
       if (this.snowflakePath === null && this.snowflakePath === undefined) {
         throw new Error('no path to glb model found');
       }
 
-      newLoader.load(this.snowflakePath, (gltf: GLTF) => {
+      newLoader.load(this.snowflakeFetchPath, (gltf: GLTF) => {
         this.snowflake = gltf.scene.children[0];
         this.scene.add(this.snowflake);
         this.snowflake.scale.set(3.5, 3.5, 3.5);
@@ -160,9 +171,11 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
     this.controls.update();
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   ngAfterViewInit(): void {
+    this.getModel();
     if (this.isBrowser) {
       this.createScene();
       this.startRenderingLoop();
