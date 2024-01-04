@@ -78,7 +78,7 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
         throw new Error('no path to glb model found');
       }
 
-      newLoader.load('/assets/glb/snowflake_01.glb', (gltf: GLTF) => {
+      newLoader.load(snowflakePath, (gltf: GLTF) => {
         this.snowflake = gltf.scene.children[0];
         this.scene.add(this.snowflake);
         this.snowflake.scale.set(3.8, 3.8, 3.8);
