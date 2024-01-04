@@ -2,14 +2,20 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  Inject,
+  InjectionToken,
   Input,
   OnInit,
+  PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { isPlatformBrowser } from '@angular/common';
+// import snowflakeGLB from '/assets/glb/snowflake_01.glb';
 
 @Component({
   selector: 'app-snowflake',
@@ -52,48 +58,61 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
   private lightFour!: THREE.PointLight;
   private controls!: OrbitControls;
 
+  public isBrowser = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: InjectionToken<Object>) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
   private createScene() {
-    this.scene = new THREE.Scene();
+    if (this.isBrowser) {
+      this.scene = new THREE.Scene();
 
-    this.loaderGLTF.setPath('../../../assets/3D/');
+      // this.loaderGLTF.setPath('../../../assets/glb/');
 
-    this.loaderGLTF.load(
-      'snowflake_01.glb',
-      (gltf: GLTF) => {
+      const newLoader = this.loaderGLTF.setDRACOLoader(new DRACOLoader());
+
+      const snowflakePath = '/assets/glb/snowflake_01.glb';
+
+      if (snowflakePath === null && snowflakePath === undefined) {
+        throw new Error('no path to glb model found');
+      }
+
+      newLoader.load('/assets/glb/snowflake_01.glb', (gltf: GLTF) => {
         this.snowflake = gltf.scene.children[0];
         this.scene.add(this.snowflake);
         this.snowflake.scale.set(3.8, 3.8, 3.8);
-      }
-    );
+      });
 
-    let aspectRatio = this.getAspectRatio();
-    this.camera = new THREE.PerspectiveCamera(
-      this.fieldOfView,
-      aspectRatio,
-      this.nearClippingPlane,
-      this.farClippingPlane
-    );
-    this.camera.position.z = this.cameraZ;
+      let aspectRatio = this.getAspectRatio();
+      this.camera = new THREE.PerspectiveCamera(
+        this.fieldOfView,
+        aspectRatio,
+        this.nearClippingPlane,
+        this.farClippingPlane
+      );
+      this.camera.position.z = this.cameraZ;
 
-    this.ambientLight = new THREE.AmbientLight(0xffffff);
-    this.scene.add(this.ambientLight);
+      this.ambientLight = new THREE.AmbientLight(0xffffff);
+      this.scene.add(this.ambientLight);
 
-    this.directionalLight = new THREE.DirectionalLight(0x4bd3ff, 0.6);
-    this.directionalLight.position.set(0, 1, 0);
-    this.directionalLight.castShadow = true;
-    this.scene.add(this.directionalLight);
-    this.lightOne = new THREE.PointLight(0xff2bf2, 80);
-    this.lightOne.position.set(0, 10, -10);
-    this.scene.add(this.lightOne);
-    this.lightTwo = new THREE.PointLight(0x4bffd3, 60);
-    this.lightTwo.position.set(10, -10, 0);
-    this.scene.add(this.lightTwo);
-    this.lightThree = new THREE.PointLight(0xb83cff, 60);
-    this.lightThree.position.set(1, 5, 1);
-    this.scene.add(this.lightThree);
-    this.lightFour = new THREE.PointLight(0x25cdf1, 60);
-    this.lightFour.position.set(3, -5, 2);
-    this.scene.add(this.lightFour);
+      this.directionalLight = new THREE.DirectionalLight(0x4bd3ff, 0.6);
+      this.directionalLight.position.set(0, 1, 0);
+      this.directionalLight.castShadow = true;
+      this.scene.add(this.directionalLight);
+      this.lightOne = new THREE.PointLight(0xff2bf2, 80);
+      this.lightOne.position.set(0, 10, -10);
+      this.scene.add(this.lightOne);
+      this.lightTwo = new THREE.PointLight(0x4bffd3, 60);
+      this.lightTwo.position.set(10, -10, 0);
+      this.scene.add(this.lightTwo);
+      this.lightThree = new THREE.PointLight(0xb83cff, 60);
+      this.lightThree.position.set(1, 5, 1);
+      this.scene.add(this.lightThree);
+      this.lightFour = new THREE.PointLight(0x25cdf1, 60);
+      this.lightFour.position.set(3, -5, 2);
+      this.scene.add(this.lightFour);
+    }
   }
 
   private getAspectRatio() {
@@ -136,13 +155,15 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
     this.controls.enableZoom = true;
     this.controls.enablePan = true;
     this.controls.update();
-  }
+  };
 
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.createScene();
-    this.startRenderingLoop();
-    this.createControls();
+    if (this.isBrowser) {
+      this.createScene();
+      this.startRenderingLoop();
+      this.createControls();
+    }
   }
 }
