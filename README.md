@@ -10,7 +10,7 @@ Task: https://github.com/rolling-scopes-school/tasks/tree/master/tasks/connectio
 
 ## Screenshots
 
-![screenshot](./src/assets/gifs/snowflake_01.gif)
+![screenshot](./src/assets/gifs/snowflake_03.gif)
 
 ![screenshot](./src/assets/gifs/snowflake_02.gif)
 
