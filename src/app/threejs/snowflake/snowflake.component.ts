@@ -15,10 +15,7 @@ import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { isPlatformBrowser } from '@angular/common';
-// import { Observable } from 'rxjs';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
-// import snowflakeGLB from '/assets/glb/snowflake_01.glb';
-// import snowflakeGLB from '../../../assets/glb/snowflake_01.glb';
 
 @Component({
   selector: 'app-snowflake',
@@ -60,13 +57,7 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
   private lightThree!: THREE.PointLight;
   private lightFour!: THREE.PointLight;
   private controls!: OrbitControls;
-  // public snowflakeFile!: string;
-  // snowflakeModel!: GLTF;
-
   public isBrowser = false;
-  // private snowflakePath = '../../../assets/glb/snowflake_01.glb';
-  /* private snowflakeFetchPath =
-    'https://www.mediafire.com/file/93lcj4zmw5tcupp/snowflake_01.glb/file'; */
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: InjectionToken<Object>,
@@ -75,58 +66,11 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
-  /* async getModel() {
-    this.snowflakeFile = this.http.get(this.snowflakeFetchPath, { mode: 'no-cors'});
-    await this.loaderGLTF
-      .loadAsync(
-        this.snowflakeFetchPath
-      )
-      .then((gltf) => (this.snowflakeFile.push(gltf)));
-    console.log(this.snowflakeFile);
-  } */
-
-  ngOnInit() {
-    /* const snowflakePath =
-      'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link';
-    this.snowflakeModel = await this.loaderGLTF.loadAsync(snowflakePath); */
-    /* this.http
-      .get(
-        'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link',
-        {
-          responseType: 'text',
-        }
-      )
-      .subscribe((data) => (data = this.snowflakeFile)); */
-    /* fetch(
-      'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link',
-      { mode: 'no-cors' }
-    ).then(data => console.log(data)); */
-  }
+  ngOnInit() {}
 
   private createScene() {
     if (this.isBrowser) {
       this.scene = new THREE.Scene();
-
-      // this.loaderGLTF.setPath('../../../assets/glb/');
-
-      // this.loaderGLTF.setDRACOLoader(new DRACOLoader());
-
-      // const snowflakePath = '/assets/glb/snowflake_01.glb';
-      // const snowflakePath = '../../../assets/glb/snowflake_01.glb';
-      /* const snowflakePath =
-        'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link'; */
-
-      /* if (this.snowflakePath === null && this.snowflakePath === undefined) {
-        throw new Error('no path to glb model found');
-      } */
-
-      /* const snowflakeRelativeUrl = THREE.LoaderUtils.extractUrlBase(
-        this.snowflakeFetchPath
-      );
-      const snowflakeSourcePath = THREE.LoaderUtils.resolveURL(
-        snowflakeRelativeUrl,
-        ''
-      ); */
 
       const loaderGLTF = new GLTFLoader();
       const dracoLoader = new DRACOLoader();
