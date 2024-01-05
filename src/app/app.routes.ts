@@ -77,5 +77,15 @@ export const routes: Routes = [
       import('./pages/not-found/not-found.component').then(
         (mod) => mod.NotFoundComponent
       ),
+      children: [
+        {
+          path: '',
+          loadComponent: () =>
+            import('./threejs/snowflake/snowflake.component').then(
+              (mod) => mod.SnowflakeComponent
+            ),
+          outlet: 'snowflake',
+        },
+      ],
   },
 ];
