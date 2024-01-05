@@ -15,8 +15,8 @@ import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { isPlatformBrowser } from '@angular/common';
-import { Observable } from 'rxjs';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+// import { Observable } from 'rxjs';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 // import snowflakeGLB from '/assets/glb/snowflake_01.glb';
 // import snowflakeGLB from '../../../assets/glb/snowflake_01.glb';
 
@@ -109,7 +109,7 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
 
       // this.loaderGLTF.setPath('../../../assets/glb/');
 
-      this.loaderGLTF.setDRACOLoader(new DRACOLoader());
+      // this.loaderGLTF.setDRACOLoader(new DRACOLoader());
 
       // const snowflakePath = '/assets/glb/snowflake_01.glb';
       // const snowflakePath = '../../../assets/glb/snowflake_01.glb';
