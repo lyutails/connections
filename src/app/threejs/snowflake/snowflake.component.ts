@@ -14,8 +14,9 @@ import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { isPlatformBrowser } from '@angular/common';
+import { Observable } from 'rxjs';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 // import snowflakeGLB from '/assets/glb/snowflake_01.glb';
 // import snowflakeGLB from '../../../assets/glb/snowflake_01.glb';
 
@@ -59,11 +60,13 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
   private lightThree!: THREE.PointLight;
   private lightFour!: THREE.PointLight;
   private controls!: OrbitControls;
+  // public snowflakeFile!: string;
+  // snowflakeModel!: GLTF;
 
   public isBrowser = false;
-  private snowflakePath = '../../../assets/glb/snowflake_01.glb';
-  private snowflakeFetchPath =
-    'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=sharing';
+  // private snowflakePath = '../../../assets/glb/snowflake_01.glb';
+  /* private snowflakeFetchPath =
+    'https://www.mediafire.com/file/93lcj4zmw5tcupp/snowflake_01.glb/file'; */
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: InjectionToken<Object>,
@@ -72,8 +75,32 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
-  getModel() {
-    return this.http.get(this.snowflakeFetchPath, { responseType: 'blob' });
+  /* async getModel() {
+    this.snowflakeFile = this.http.get(this.snowflakeFetchPath, { mode: 'no-cors'});
+    await this.loaderGLTF
+      .loadAsync(
+        this.snowflakeFetchPath
+      )
+      .then((gltf) => (this.snowflakeFile.push(gltf)));
+    console.log(this.snowflakeFile);
+  } */
+
+  ngOnInit() {
+    /* const snowflakePath =
+      'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link';
+    this.snowflakeModel = await this.loaderGLTF.loadAsync(snowflakePath); */
+    /* this.http
+      .get(
+        'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link',
+        {
+          responseType: 'text',
+        }
+      )
+      .subscribe((data) => (data = this.snowflakeFile)); */
+    /* fetch(
+      'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link',
+      { mode: 'no-cors' }
+    ).then(data => console.log(data)); */
   }
 
   private createScene() {
@@ -82,17 +109,34 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
 
       // this.loaderGLTF.setPath('../../../assets/glb/');
 
-      const newLoader = this.loaderGLTF.setDRACOLoader(new DRACOLoader());
+      this.loaderGLTF.setDRACOLoader(new DRACOLoader());
 
       // const snowflakePath = '/assets/glb/snowflake_01.glb';
       // const snowflakePath = '../../../assets/glb/snowflake_01.glb';
-      // const snowflakePath = 'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link';
+      /* const snowflakePath =
+        'https://drive.google.com/file/d/1d2OSDkU7hfgxXIwbak8MEDIQs4LGxIU5/view?usp=drive_link'; */
 
-      if (this.snowflakePath === null && this.snowflakePath === undefined) {
+      /* if (this.snowflakePath === null && this.snowflakePath === undefined) {
         throw new Error('no path to glb model found');
-      }
+      } */
 
-      newLoader.load(this.snowflakeFetchPath, (gltf: GLTF) => {
+      /* const snowflakeRelativeUrl = THREE.LoaderUtils.extractUrlBase(
+        this.snowflakeFetchPath
+      );
+      const snowflakeSourcePath = THREE.LoaderUtils.resolveURL(
+        snowflakeRelativeUrl,
+        ''
+      ); */
+
+      const loaderGLTF = new GLTFLoader();
+      const dracoLoader = new DRACOLoader();
+      dracoLoader.setDecoderPath('../../../assets/draco/');
+      loaderGLTF.setDRACOLoader(dracoLoader);
+
+      const snowflakeModelGLB =
+        '../../../assets/3d_glb/snowflake_compressed_01-v1.glb';
+
+      loaderGLTF.load(snowflakeModelGLB, (gltf: GLTF) => {
         this.snowflake = gltf.scene.children[0];
         this.scene.add(this.snowflake);
         this.snowflake.scale.set(3.5, 3.5, 3.5);
@@ -171,11 +215,8 @@ export class SnowflakeComponent implements OnInit, AfterViewInit {
     this.controls.update();
   };
 
-  ngOnInit(): void {
-  }
-
   ngAfterViewInit(): void {
-    this.getModel();
+    // this.getModel();
     if (this.isBrowser) {
       this.createScene();
       this.startRenderingLoop();
